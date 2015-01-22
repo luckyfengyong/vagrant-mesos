@@ -6,7 +6,6 @@ source "/vagrant/scripts/common.sh"
 function setupMesos {
 	echo "zk://mesosnode1:2181/mesos" >> /etc/mesos/zk
 	echo "1" >> /etc/mesos-master/quorum
-	update-rc.d -f mesos-slave remove
 }
 
 function installMesos {
