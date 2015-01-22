@@ -19,7 +19,7 @@ function setupHosts {
 	echo "modifying /etc/hosts file"
 	for i in $(seq 1 $TOTAL_NODES)
 	do 
-		entry="10.211.55.10${i} mesosnode${i}"
+		entry="10.211.56.10${i} mesosnode${i}"
 		echo "adding ${entry}"
 		echo "${entry}" >> /etc/nhosts
 	done
