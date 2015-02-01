@@ -112,5 +112,7 @@ curl -X DELETE -H "Content-Type: application/json" mesosnode1:8080/v2/apps/${app
 ```
 
 Please refer to http://mesosphere.github.io/marathon/docs/rest-api.html for all the REST API of marathon.
+
 Please refer to http://mesosphere.github.io/marathon/docs/constraints.html for constraints of marathon.
+
 Please refer to http://mesosphere.github.io/marathon/docs/native-docker.html for how to create docker application in marathon.
