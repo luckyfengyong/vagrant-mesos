@@ -3,16 +3,14 @@ vagrant-mesos-latest on centos 6.5
 
 # Introduction
 
-Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1.4.1), zookeepr r3.4.6, mesos latest (0.21.1).
+Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1.4.1), zookeepr r3.4.6, mesos latest (0.21.1) and chronos (2.3.1).
 
-1. mesosnode1 : zookeeper + mesos master + marathon
+1. mesosnode1 : zookeeper + mesos master + marathon + chronos
 2. mesosnode2 : mesos slave with docker
 3. mesosnode3 : mesos slave with docker
 4. mesosnode4 : mesos slave with docker
 5. mesosnode5 : mesos slave with docker
 6. mesosnode6 : mesos slave with docker
-
-TODO: Chronos (https://github.com/mesos/chronos)
 
 TODO: Kubernetes-Mesos (https://github.com/mesosphere/kubernetes-mesos)
 
@@ -82,6 +80,7 @@ SSH into mesosnode1 and run the following command hto start mesos master.
 ```
 setsid /usr/bin/mesos-init-wrapper master
 setsid /usr/local/bin/marathon
+setsid /usr/local/bin/chronos
 ```
 
 SSH into other nodes and run the following command to start mesos slave.
@@ -120,3 +119,7 @@ Please refer to http://mesosphere.github.io/marathon/docs/rest-api.html for all 
 Please refer to http://mesosphere.github.io/marathon/docs/constraints.html for constraints of marathon.
 
 Please refer to http://mesosphere.github.io/marathon/docs/native-docker.html for how to create docker application in marathon.
+
+### Test chronos
+
+Please refer to https://github.com/mesos/chronos for more details of chronos

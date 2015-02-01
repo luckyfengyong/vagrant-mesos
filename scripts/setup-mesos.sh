@@ -11,13 +11,14 @@ function setupMesos {
 	rm -rf /etc/init/mesos-master.conf
 	rm -rf /etc/init/marathon.conf
 	rm -rf /etc/init/mesos-slave.conf
+	rm -rf /etc/init//etc/init/chronos.conf
 	mkdir -p /etc/marathon/conf
 	echo '604800' > /etc/marathon/conf/task_launch_timeout
 }
 
 function installMesos {
 	rpm -Uvh http://repos.mesosphere.io/el/6/noarch/RPMS/mesosphere-el-repo-6-2.noarch.rpm
-	yum install -y mesos marathon
+	yum install -y mesos marathon chronos
 	if resourceExists $MESOS_ARCHIVE; then
 		echo "install mesos example from remote file"
 	else
