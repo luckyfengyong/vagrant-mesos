@@ -96,7 +96,7 @@ Please refer to http://mesos.apache.org/gettingstarted/ for how to build and run
 
 ### Test marathon
 
-Access http://10.211.56.101:8080/ for GUI of marathon. Follow the examples in https://mesosphere.com/docs/tutorials/run-play-on-mesos to test the marathon.
+Access http://10.211.56.101:8080/ for GUI of marathon. Follow the examples in https://github.com/mesosphere/marathon/tree/master/examples to test the marathon.
 
 Run the following command to create a docker application with specification of docker.json
 
