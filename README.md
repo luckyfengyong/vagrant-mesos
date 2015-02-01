@@ -44,6 +44,7 @@ If you have the resources (CPU + Disk Space + Memory), you may modify Vagrantfil
 You can make the VM setup even faster if you pre-download the zookeeper into the /resources directory.
 
 * /resources/zookeeper-3.4.6.tar.gz
+* /resources/mesos-0.21.1.tar.gz
 
 The setup script will automatically detect if these files (with precisely the same names) exist and use them instead. If you are using slightly different versions, you will have to modify the script accordingly.
 
@@ -70,7 +71,7 @@ Or Run following command to send command to Zookeeper. Refer to https://zookeepe
 echo ruok | nc mesosnode1 2181
 ```
 
-# Start Mesos
+## Start mesos
 
 SSH into mesosnode1 and run the following command hto start mesos master.
 
@@ -86,3 +87,12 @@ setsid /usr/bin/mesos-init-wrapper slave
 ```
 
 Please refer to https://github.com/deric/mesos-deb-packaging/blob/master/mesos-init-wrapper for how to configure parameters when start mesos master or slave.
+
+### Test mesos
+
+Access http://10.211.56.101:5050/ for GUI of mesos.
+Please refer to http://mesos.apache.org/gettingstarted/ for how to build and run mesos example on centos 6.5
+
+### Test marathon
+
+Access http://10.211.56.101:8080/ for GUI of marathon
