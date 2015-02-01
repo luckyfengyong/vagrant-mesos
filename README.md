@@ -3,14 +3,14 @@ vagrant-mesos-latest on centos 6.5
 
 # Introduction
 
-Vagrant project to spin up a cluster of 6 virtual machines with zookeepr r3.4.6, mesos latest (0.21.1).
+Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1.4.1), zookeepr r3.4.6, mesos latest (0.21.1).
 
 1. mesosnode1 : zookeeper + mesos master + marathon
-2. mesosnode2 : mesos slave
-3. mesosnode3 : mesos slave
-4. mesosnode4 : mesos slave
-5. mesosnode5 : mesos slave
-6. mesosnode6 : mesos slave
+2. mesosnode2 : mesos slave with docker
+3. mesosnode3 : mesos slave with docker
+4. mesosnode4 : mesos slave with docker
+5. mesosnode5 : mesos slave with docker
+6. mesosnode6 : mesos slave with docker
 
 # Getting Started
 
@@ -87,6 +87,7 @@ setsid /usr/bin/mesos-init-wrapper slave
 ```
 
 Please refer to https://github.com/deric/mesos-deb-packaging/blob/master/mesos-init-wrapper for how to configure parameters when start mesos master or slave.
+Please refer to http://mesosphere.github.io/marathon/docs/command-line-flags.html for how to configure parameters when start marathon.
 
 ### Test mesos
 
@@ -95,4 +96,4 @@ Please refer to http://mesos.apache.org/gettingstarted/ for how to build and run
 
 ### Test marathon
 
-Access http://10.211.56.101:8080/ for GUI of marathon
+Access http://10.211.56.101:8080/ for GUI of marathon. Follow the examples in https://mesosphere.com/docs/tutorials/run-play-on-mesos to test the marathon.

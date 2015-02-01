@@ -27,13 +27,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 				s.path = "scripts/setup-centos-hosts.sh"
 				s.args = "-t #{numNodes}"
 			end
-			node.vm.provision "shell", path: "scripts/setup-mesos.sh"
+			if i != 1
+				node.vm.provision "shell", path: "scripts/setup-mesosslave.sh"
+			end
 			if i == 1
 				node.vm.provision "shell" do |s|
 					s.path = "scripts/setup-centos-ssh.sh"
 					s.args = "-s 2 -t #{numNodes}"
 				end
 				node.vm.provision "shell", path: "scripts/setup-zookeeper.sh"
+				node.vm.provision "shell", path: "scripts/setup-mesos.sh"
 			end
 		end
 	end
