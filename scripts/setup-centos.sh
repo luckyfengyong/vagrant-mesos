@@ -14,8 +14,6 @@ function installUtilities {
     yum install -y nc
     yum install -y zip
 	yum install -y docker-io
-	service docker start
-	chkconfig docker on	
 }
 echo "setup centos"
 

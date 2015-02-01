@@ -24,6 +24,10 @@ function installMesos {
 	fi
 	tar -xzf /vagrant/resources/$MESOS_ARCHIVE -C /usr/local
 	ln -s /usr/local/mesos-$MESOS_VERSION /usr/local/mesos
+	# update device-mapper otherwise docker fail to start
+	yum -y update
+	service docker start
+	chkconfig docker on	
 }
 
 echo "setup mesos"
