@@ -97,3 +97,18 @@ Please refer to http://mesos.apache.org/gettingstarted/ for how to build and run
 ### Test marathon
 
 Access http://10.211.56.101:8080/ for GUI of marathon. Follow the examples in https://mesosphere.com/docs/tutorials/run-play-on-mesos to test the marathon.
+
+Run the following command to create a docker application with specification of docker.json
+
+```
+curl -X POST -H "Content-Type: application/json" http://mesosnode1:8080/v2/apps -d@docker.json
+```
+
+Run the following command to query and delete the application
+
+```
+curl -X GET -H "Content-Type: application/json" mesosnode1:8080/v2/apps | python -m json.tool
+curl -X DELETE -H "Content-Type: application/json" mesosnode1:8080/v2/apps/${appid} | python -m json.tool
+```
+
+Please refer to http://mesosphere.github.io/marathon/docs/rest-api.html for all the REST API of marathon, refer to http://mesosphere.github.io/marathon/docs/constraints.html for constraints of marathon, refer to http://mesosphere.github.io/marathon/docs/native-docker.html for how to create docker application in marathon.
