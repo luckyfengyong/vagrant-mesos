@@ -13,6 +13,7 @@ Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1
 6. mesosnode6 : mesos slave with docker
 
 TODO: Chronos (https://github.com/mesos/chronos)
+
 TODO: Kubernetes-Mesos (https://github.com/mesosphere/kubernetes-mesos)
 
 # Getting Started
