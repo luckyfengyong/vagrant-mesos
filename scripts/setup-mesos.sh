@@ -14,6 +14,7 @@ function setupMesos {
 	rm -rf /etc/init//etc/init/chronos.conf
 	mkdir -p /etc/marathon/conf
 	echo '604800' > /etc/marathon/conf/task_launch_timeout
+	cp -f $K8SMESOS_RES_DIR/k8smesos.sh /etc/profile.d/k8smesos.sh
 }
 
 function installMesos {
@@ -29,7 +30,14 @@ function installMesos {
 	# update device-mapper otherwise docker fail to start
 	yum -y update
 	service docker start
-	chkconfig docker on	
+	chkconfig docker on
+	# install development environment for kubernetes-mesos
+	yum install -y golang
+	curl -L https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz | \
+	tar xz && (cd protobuf-2.5.0/ && ./configure --prefix=/usr && make && make install)
+	mkdir -pv /usr/local/gocode && \
+	(export GOPATH=/usr/local/gocode; cd /usr/local/gocode && go get github.com/tools/godep && \
+	ln -sv /usr/local/gocode/bin/godep /usr/local/bin/godep)
 }
 
 echo "setup mesos"

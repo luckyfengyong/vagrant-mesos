@@ -16,6 +16,7 @@ ZOOKEEPER_RES_DIR=/vagrant/resources/zookeeper
 MESOS_VERSION=0.21.1
 MESOS_ARCHIVE=mesos-$MESOS_VERSION.tar.gz
 MESOS_MIRROR_DOWNLOAD=http://www.apache.org/dist/mesos/$MESOS_VERSION/$MESOS_ARCHIVE
+K8SMESOS_RES_DIR=/vagrant/resources/k8smesos
 
 function resourceExists {
 	FILE=/vagrant/resources/$1
