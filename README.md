@@ -80,7 +80,7 @@ SSH into mesosnode1 and run the following command hto start mesos master.
 ```
 setsid /usr/bin/mesos-init-wrapper master
 setsid /usr/local/bin/marathon
-setsid /usr/local/bin/chronos
+setsid /usr/bin/chronos
 ```
 
 SSH into other nodes and run the following command to start mesos slave.
@@ -90,16 +90,20 @@ setsid /usr/bin/mesos-init-wrapper slave
 ```
 
 Please refer to https://github.com/deric/mesos-deb-packaging/blob/master/mesos-init-wrapper for how to configure parameters when start mesos master or slave.
+
 Please refer to http://mesosphere.github.io/marathon/docs/command-line-flags.html for how to configure parameters when start marathon.
 
 ### Test mesos
 
 Access http://10.211.56.101:5050/ for GUI of mesos.
+
 Please refer to http://mesos.apache.org/gettingstarted/ for how to build and run mesos example on centos 6.5
 
 ### Test marathon
 
-Access http://10.211.56.101:8080/ for GUI of marathon. Follow the examples in https://github.com/mesosphere/marathon/tree/master/examples to test the marathon.
+Access http://10.211.56.101:8080/ for GUI of marathon.
+
+Follow the examples in https://github.com/mesosphere/marathon/tree/master/examples to test the marathon.
 
 Run the following command to create a docker application with specification of docker.json
 
@@ -121,5 +125,7 @@ Please refer to http://mesosphere.github.io/marathon/docs/constraints.html for c
 Please refer to http://mesosphere.github.io/marathon/docs/native-docker.html for how to create docker application in marathon.
 
 ### Test chronos
+
+Access http://10.211.56.101:4400/ for GUI of chronos.
 
 Please refer to https://github.com/mesos/chronos for more details of chronos
