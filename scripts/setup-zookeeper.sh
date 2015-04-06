@@ -36,6 +36,6 @@ function installZookeeper {
 
 
 echo "setup zookeeper"
-installZookeeper
-setupZookeeper
+#installZookeeper
+#setupZookeeper
 setupEnvVars
