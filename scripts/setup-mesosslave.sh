@@ -9,7 +9,9 @@ function setupMesos {
 	echo "1" > /etc/mesos-master/quorum
 	#disable auto start of upstart
 	rm -rf /etc/init/mesos-master.conf
+	rm -rf /etc/init/marathon.conf
 	rm -rf /etc/init/mesos-slave.conf
+	rm -rf /etc/init/chronos.conf
 	echo 'docker,mesos' > /etc/mesos-slave/containerizers
 	echo '5mins' > /etc/mesos-slave/executor_registration_timeout
 }
