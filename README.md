@@ -3,7 +3,7 @@ vagrant-mesos-latest on Ubuntu 14.04
 
 # Introduction
 
-Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1.5.0), swarm 0.2.0-rc2, zookeepr r3.4.5, mesos latest (0.22.0), marathon (0.8.1) and chronos (2.3.2).
+Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1.5.0), swarm 0.2.0-rc2, compose 1.2.0rc3, zookeepr r3.4.5, mesos latest (0.22.0), marathon (0.8.1) and chronos (2.3.2).
 
 1. mesosnode1 : zookeeper + mesos master + marathon + chronos
 2. mesosnode2 : mesos slave with docker
@@ -124,5 +124,19 @@ Please refer to https://github.com/mesos/chronos for more details of chronos
 
 ## Start Swarm
 
+https://github.com/docker/swarm/
+
+http://docs.docker.com/swarm/
+
+http://docs.docker.com/swarm/discovery/
+
+http://matthewkwilliams.com/index.php/2015/04/03/swarming-raspberry-pi-docker-swarm-discovery-options/
+
+## Start Compose
+
+https://docs.docker.com/compose/
+
 ## Start Weave
+
 http://weave.works/guides/weave-docker-ubuntu-simple.htm
+http://weave.works/guides/weave-docker-coreos-simple.html
