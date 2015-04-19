@@ -11,7 +11,7 @@ function setupMesos {
 	rm -rf /etc/init/mesos-master.conf
 	rm -rf /etc/init/marathon.conf
 	rm -rf /etc/init/mesos-slave.conf
-	rm -rf /etc/init//etc/init/chronos.conf
+	rm -rf /etc/init/chronos.conf
 	mkdir -p /etc/marathon/conf
 	echo '604800' > /etc/marathon/conf/task_launch_timeout
 	#cp -f $K8SMESOS_RES_DIR/k8smesos.sh /etc/profile.d/k8smesos.sh
