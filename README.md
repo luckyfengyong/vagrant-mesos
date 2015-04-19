@@ -14,6 +14,7 @@ Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1
 
 TODO: Kubernetes-Mesos (https://github.com/mesosphere/kubernetes-mesos)
 TODO: Mesos-DNS https://mesosphere.github.io/mesos-dns/docs/
+TODO: Weave-DNS, Consul DNS, Sky-DNS
 
 # Getting Started
 
@@ -138,6 +139,8 @@ http://matthewkwilliams.com/index.php/2015/04/03/swarming-raspberry-pi-docker-sw
 https://docs.docker.com/compose/
 
 ## Start Weave
+
+### Weave DNS
 
 http://weave.works/guides/weave-docker-ubuntu-simple.htm
 http://weave.works/guides/weave-docker-coreos-simple.html
