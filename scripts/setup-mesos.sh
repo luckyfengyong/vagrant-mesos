@@ -25,6 +25,11 @@ function installMesos {
 	CODENAME=$(lsb_release -cs)
 	echo "deb http://repos.mesosphere.io/${DISTRO} ${CODENAME} main" |  sudo tee /etc/apt/sources.list.d/mesosphere.list
 	apt-get -y update
+	#to build mesos source code/framework http://mesos.apache.org/gettingstarted/
+	apt-get -y install openjdk-7-jdk
+	apt-get -y install g++
+	apt-get -y install autoconf libtool
+	apt-get -y install build-essential python-dev python-boto libcurl4-nss-dev libsasl2-dev maven libapr1-dev libsvn-dev
 	apt-get -y install mesos marathon chronos
 
 	
