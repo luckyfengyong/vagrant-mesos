@@ -31,7 +31,6 @@ function installMesos {
 	apt-get -y install autoconf libtool
 	apt-get -y install build-essential python-dev python-boto libcurl4-nss-dev libsasl2-dev maven libapr1-dev libsvn-dev
 	apt-get -y install mesos marathon chronos
-
 	
 	# for centos
 	# rpm -Uvh http://repos.mesosphere.io/el/6/noarch/RPMS/mesosphere-el-repo-6-2.noarch.rpm
@@ -62,7 +61,6 @@ function installMesos {
 	#git clone https://github.com/mesosphere/kubernetes-mesos.git src/github.com/mesosphere/kubernetes-mesos
 	#cd src/github.com/mesosphere/kubernetes-mesos
 	#make bootstrap
-	
 }
 
 echo "setup mesos"

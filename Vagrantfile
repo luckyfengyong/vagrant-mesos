@@ -34,6 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 				node.vm.provision "shell", path: "scripts/setup-mesos.sh"
 			end
 			node.vm.provision "shell", path: "scripts/setup-zookeeper.sh"
+			node.vm.provision "shell", path: "scripts/setup-etcd.sh"
 		end
 	end
 end

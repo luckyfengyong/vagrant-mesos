@@ -17,6 +17,12 @@ MESOS_VERSION=0.21.1
 MESOS_ARCHIVE=mesos-$MESOS_VERSION.tar.gz
 MESOS_MIRROR_DOWNLOAD=http://www.apache.org/dist/mesos/$MESOS_VERSION/$MESOS_ARCHIVE
 K8SMESOS_RES_DIR=/vagrant/resources/k8smesos
+#etcd
+ETCD_PREFIX=/usr/local/etcd
+ETCD_VERSION=v2.0.12
+ETCD_ARCHIVE=etcd-$ETCD_VERSION-linux-amd64.tar.gz
+ETCD_MIRROR_DOWNLOAD=https://github.com/coreos/etcd/releases/download/$ETCD_VERSION/$ETCD_ARCHIVE
+ETCD_RES_DIR=/vagrant/resources/etcd
 
 function resourceExists {
 	FILE=/vagrant/resources/$1

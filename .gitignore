@@ -1,3 +1,6 @@
 .vagrant/*
 resources/mesos-0.21.1.tar.gz
 resources/zookeeper-3.4.6.tar.gz
+resources/etcd-v2.0.12-linux-amd64.tar.gz
+resources/jdk-7u75-linux-x64.tar.gz
+resources/go1.4.2.linux-amd64.tar.gz
