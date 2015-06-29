@@ -138,7 +138,7 @@ Run the following command to verify the Swarm on Mesos
 
 ```
 docker -H tcp://10.211.56.101:4375 info
-docker -H tcp://10.211.56.101:4375 run -d --name sleep ubuntu /bin/sleep 1000000000
+docker -H tcp://10.211.56.101:4375 run -d -m 300M -c 1 --name sleep ubuntu /bin/sleep 1000000000
 ```
 
 https://github.com/docker/swarm/tree/master/cluster/mesos
