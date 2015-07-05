@@ -3,7 +3,7 @@ vagrant-mesos-swarm-latest on Ubuntu 14.04
 
 # Introduction
 
-Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1.5.0), swarm v0.3.0-rc3, compose 1.2.0rc3, zookeepr r3.4.5, mesos latest (0.22.0), marathon (0.8.1) and chronos (2.3.2).
+Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1.5.0), swarm v0.3.0-rc3, spark v1.4.0, compose 1.2.0rc3, zookeepr r3.4.5, mesos latest (0.22.0), marathon (0.8.1) and chronos (2.3.2).
 
 1. mesosnode1 : zookeeper + mesos master + marathon + chronos
 2. mesosnode2 : mesos slave with docker
@@ -125,6 +125,40 @@ Please refer to http://mesosphere.github.io/marathon/docs/native-docker.html for
 Access http://10.211.56.101:4400/ for GUI of chronos.
 
 Please refer to https://github.com/mesos/chronos for more details of chronos
+
+# Start Spark on Mesos
+
+## Cluster Mode
+
+Run the following command to start Spark framework on Mesos with cluster mode
+
+```
+/usr/local/spark/sbin/start-mesos-dispatcher.sh -m mesos://mesosnode1:5050
+```
+
+After that submit Spark job to mesos-dispatcher as follows
+
+```
+spark-submit --master mesos://mesosnode1:7077 --class org.apache.spark.examples.SparkPi $SPARK_HOME/lib/spark-examples-1.4.0-hadoop2.6.0.jar 100
+```
+
+Mesos executor will try to find spark binaries by $SPARK_HOME or user could define spark.mesos.executor.home as "/usr/local/spark" in /usr/local/spark/conf/spark-defaults.conf. Please refer to https://spark.apache.org/docs/latest/running-on-mesos.html for more configuration parameters. 
+
+## Client Mode
+
+Run the following command to start a Spark client on Mesos with client mode
+
+```
+spark-shell --master mesos://mesosnode1:5050
+```
+
+or
+
+```
+spark-submit --master mesos://mesosnode1:5050 --class org.apache.spark.examples.SparkPi $SPARK_HOME/lib/spark-examples-1.4.0-hadoop2.6.0.jar 100
+```
+
+Mesos executor will try to find spark binaries by $SPARK_HOME or user could define spark.mesos.executor.home as "/usr/local/spark" in /usr/local/spark/conf/spark-defaults.conf. Please refer to https://spark.apache.org/docs/latest/running-on-mesos.html for more configuration parameters. 
 
 # Start Swarm on Mesos
 

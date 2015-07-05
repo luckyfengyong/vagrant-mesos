@@ -27,14 +27,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 				s.path = "scripts/setup-ubuntu-hosts.sh"
 				s.args = "-t #{numNodes}"
 			end
-			if i != 1
-				node.vm.provision "shell", path: "scripts/setup-mesosslave.sh"
-			end
-			if i == 1
-				node.vm.provision "shell", path: "scripts/setup-mesos.sh"
-			end
+			node.vm.provision "shell", path: "scripts/setup-java.sh"
+			node.vm.provision "shell", path: "scripts/setup-scala.sh"
 			node.vm.provision "shell", path: "scripts/setup-zookeeper.sh"
 			node.vm.provision "shell", path: "scripts/setup-etcd.sh"
+			node.vm.provision "shell", path: "scripts/setup-spark.sh"
+			if i == 1
+				node.vm.provision "shell", path: "scripts/setup-mesos.sh"
+			else
+				node.vm.provision "shell", path: "scripts/setup-mesosslave.sh"
+			end			
+
 		end
 	end
 end
