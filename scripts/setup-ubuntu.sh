@@ -31,7 +31,7 @@ function installUtilities {
 	fi
 	tar -C /usr/local -xzf $FILE
 
-	/bin/mkdir -p /usr/local/src/gocode; export GOPATH=/usr/local/src/gocode; export PATH=$PATH:/usr/local/go/bin
+	/bin/mkdir -p /usr/local/src/gocode; export GOPATH=/usr/local/src/gocode; export PATH=$PATH:/usr/local/go/bin:/usr/local/src/gocode/bin
 	cp -f /vagrant/resources/swarm/swarm.sh /etc/profile.d/swarm.sh
 	chmod +x /etc/profile.d/swarm.sh
 	go get github.com/tools/godep
