@@ -14,6 +14,7 @@ function setupMesos {
 	rm -rf /etc/init/chronos.conf
 	echo 'docker,mesos' > /etc/mesos-slave/containerizers
 	echo '5mins' > /etc/mesos-slave/executor_registration_timeout
+	echo 'resources=cpus(*):8; mem(*):15360; disk(*):710534; ports(*):[31000-32000]' > /etc/mesos-slave/resources
 }
 
 function installMesos {
