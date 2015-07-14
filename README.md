@@ -25,7 +25,7 @@ TODO: Weave-DNS, Consul DNS, Sky-DNS
 3. Run ```vagrant box add Ubuntu https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vbox.box```
 4. Git clone this project, and change directory (cd) into this project (directory).
 5. Run ```vagrant up``` to create the VM.
-6. Run ```vagrant ssh``` to get into your VM. The VM name in vagrant is mesosnode1, mesosnode2 ... mesosnoden. While the ip of VMs depends on the scale of your mesos cluster. If it is less then 10, the IP will be 10.211.56.101, .... 10.211.56.10n. Or you could run ```ssh``` directly with ip of VMs and username/password of root/vagrant.
+6. Run ```vagrant ssh``` to get into your VM. The VM name in vagrant is mesosnode1, mesosnode2 ... mesosnoden. While the ip of VMs depends on the scale of your mesos cluster. If it is less then 10, the IP will be 10.211.56.101, .... 10.211.56.10n. Or you could run ```ssh``` directly with ip of VMs and username/password of demo/demo, and then execute "su - root" with password of vagrant.
 7. Run ```vagrant destroy``` when you want to destroy and get rid of the VM.
 8. The directory of /vagrant is mounted in each VM by vagrant if you want to access host machine from VM. You could also use win-sshfs if you want to access the local file system of VM from host machine. Please refer to http://code.google.com/p/win-sshfs/ for details.
 
