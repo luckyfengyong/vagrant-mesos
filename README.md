@@ -139,7 +139,7 @@ Run the following command to start Spark framework on Mesos with cluster mode
 After that submit Spark job to mesos-dispatcher as follows
 
 ```
-spark-submit --master mesos://mesosnode1:7077  --executor-memory 512m --executor-cores 1 --class org.apache.spark.examples.SparkPi $SPARK_HOME/lib/spark-examples-1.4.0-hadoop2.6.0.jar 100
+spark-submit --deploy-mode cluster --master mesos://mesosnode1:7077  --executor-memory 512m --executor-cores 1 --class org.apache.spark.examples.SparkPi $SPARK_HOME/lib/spark-examples-1.4.0-hadoop2.6.0.jar 100
 ```
 
 By default Spark scheduler works with fine grain mode. Within fine grain mode, when Spark driver gets offer from Mesos, it will try to dispatch pending task to the offer. Each task consumes cpu of spark.task.cpus. If there is no executor in the offer, Spark will ask Mesos to create spark executor first with memory of "max(OVERHEAD_FRACTION * sc.executorMemory, OVERHEAD_MINIMUM) + sc.executorMemory" (By default, it will be 512m + 384m) and cpu of spark.mesos.mesosExecutor.cores. 
