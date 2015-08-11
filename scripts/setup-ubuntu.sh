@@ -50,7 +50,7 @@ function installUtilities {
 	# https://github.com/docker/compose/blob/master/CONTRIBUTING.md
 	curl https://bootstrap.pypa.io/ez_setup.py -o - | python
 	apt-get install -y python2.7-dev libyaml-dev python-pip
-	pip install docker-py
+	pip install docker-py "ipython[all]"
 	curl -L https://github.com/docker/compose/releases/download/1.3.0rc3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 	chmod +x /usr/local/bin/docker-compose
 	curl -L https://raw.githubusercontent.com/docker/compose/1.2.0/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose

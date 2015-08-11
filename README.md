@@ -136,6 +136,8 @@ Run the following command to start Spark framework on Mesos with cluster mode
 /usr/local/spark/sbin/start-mesos-dispatcher.sh -m mesos://mesosnode1:5050
 ```
 
+Access http://10.211.56.101:8081 for GUI of Spark Drivers for Mesos cluster if above command is executed in mesosnode1. 
+
 After that submit Spark job to mesos-dispatcher as follows
 
 ```
