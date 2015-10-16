@@ -216,6 +216,8 @@ Refer to https://github.com/coreos/etcd/blob/master/Documentation/admin_guide.md
 Now start the kubernetes-mesos API server, controller manager, and scheduler on the master node:
 
 ```
+cd /usr/local/src/kubernetes
+
 setsid km apiserver \
   --address=10.211.56.101 \
   --etcd-servers=http://10.211.56.101:4001 \

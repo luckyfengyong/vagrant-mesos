@@ -57,6 +57,7 @@ function installMesos {
 	make
 	cp -f /vagrant/resources/k8smesos/k8smesos.sh /etc/profile.d/k8smesos.sh
 	chmod +x /etc/profile.d/k8smesos.sh
+	cp -f /vagrant/resources/k8smesos/  /usr/local/src/kubernetes/mesos-cloud.conf
 }
 
 echo "setup mesos"
