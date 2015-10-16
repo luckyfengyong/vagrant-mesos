@@ -23,18 +23,19 @@ function installUtilities {
 	# http://docs.docker.com/swarm/discovery/ http://matthewkwilliams.com/index.php/2015/04/03/swarming-raspberry-pi-docker-swarm-discovery-options/
 	apt-get install -y git cgdb bison
 
-	FILE=/vagrant/resources/go1.4.2.linux-amd64.tar.gz
-	if resourceExists go1.4.2.linux-amd64.tar.gz; then
+	FILE=/vagrant/resources/go1.4.linux-amd64.tar.gz
+	if resourceExists go1.4.linux-amd64.tar.gz; then
 		echo "install golang from local file"
 	else
-		curl -o $FILE -O -L https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz
+		curl -o $FILE -O -L https://storage.googleapis.com/golang/go1.4.linux-amd64.tar.gz
 	fi
 	tar -C /usr/local -xzf $FILE
 
 	/bin/mkdir -p /usr/local/src/gocode; export GOPATH=/usr/local/src/gocode; export PATH=$PATH:/usr/local/go/bin:/usr/local/src/gocode/bin
+	go get github.com/tools/godep
+	
 	cp -f /vagrant/resources/swarm/swarm.sh /etc/profile.d/swarm.sh
 	chmod +x /etc/profile.d/swarm.sh
-	go get github.com/tools/godep
 	/bin/mkdir -p /usr/local/src/gocode/src/github.com/docker/
 	cd /usr/local/src/gocode/src/github.com/docker/
 	git clone https://github.com/docker/swarm

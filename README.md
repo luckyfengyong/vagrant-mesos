@@ -3,7 +3,7 @@ vagrant-mesos-swarm-latest on Ubuntu 14.04
 
 # Introduction
 
-Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1.5.0), swarm v0.3.0-rc3, spark v1.4.0, compose 1.2.0rc3, zookeepr r3.4.5, mesos latest (0.22.0), marathon (0.8.1) and chronos (2.3.2).
+Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1.5.0), swarm v0.3.0-rc3, spark v1.4.0, compose 1.2.0rc3, zookeepr r3.4.5, mesos latest (v 0.22.0), marathon (v 0.8.1), chronos (v 2.3.2) and kubernetes (v 1.1) on Mesos
 
 1. mesosnode1 : zookeeper + mesos master + marathon + chronos
 2. mesosnode2 : mesos slave with docker
@@ -11,8 +11,6 @@ Vagrant project to spin up a cluster of 6 virtual machines with docker latest (1
 4. mesosnode4 : mesos slave with docker
 5. mesosnode5 : mesos slave with docker
 6. mesosnode6 : mesos slave with docker
-
-TODO: Kubernetes-Mesos (https://github.com/mesosphere/kubernetes-mesos)
 
 TODO: Mesos-DNS https://mesosphere.github.io/mesos-dns/docs/
 
@@ -144,9 +142,11 @@ After that submit Spark job to mesos-dispatcher as follows
 spark-submit --deploy-mode cluster --master mesos://mesosnode1:7077  --executor-memory 512m --executor-cores 1 --class org.apache.spark.examples.SparkPi $SPARK_HOME/lib/spark-examples-1.4.0-hadoop2.6.0.jar 100
 ```
 
-By default Spark scheduler works with fine grain mode. Within fine grain mode, when Spark driver gets offer from Mesos, it will try to dispatch pending task to the offer. Each task consumes cpu of spark.task.cpus. If there is no executor in the offer, Spark will ask Mesos to create spark executor first with memory of "max(OVERHEAD_FRACTION * sc.executorMemory, OVERHEAD_MINIMUM) + sc.executorMemory" (By default, it will be 512m + 384m) and cpu of spark.mesos.mesosExecutor.cores. 
+By default Spark scheduler works with fine grain mode. Within fine grain mode, when Spark driver gets offer from Mesos, it will try to dispatch pending task to the offer. Each task consumes cpu of spark.task.cpus. If there is no executor in the offer, Spark will ask Mesos to create spark executor first with memory of "max(OVERHEAD_FRACTION * sc.executorMemory, OVERHEAD_MINIMUM) + sc.executorMemory" (By default, it will be 384m + 512m) and cpu of spark.mesos.mesosExecutor.cores. 
 
-To configure coarse mode, configure "spark.mesos.coarse true" in spark-defaults.conf. Within coarse mode, when Spark driver gets offers from Mesos, it will try to start executor with memory of "max(OVERHEAD_FRACTION * sc.executorMemory, OVERHEAD_MINIMUM) + sc.executorMemory" (By default, it will be 512m + 384m) and cpu of all the allocated cpu. 
+To configure coarse mode, configure "spark.mesos.coarse true" in spark-defaults.conf. Within coarse mode, when Spark driver gets offers from Mesos, it will try to start executor with memory of "max(OVERHEAD_FRACTION * sc.executorMemory, OVERHEAD_MINIMUM) + sc.executorMemory" (By default, it will be 384m + 512m) and cpu of all the allocated cpu. 
+
+sc.executorMemory could be configured by spark.executor.memory or environment of SPARK_EXECUTOR_MEMORY/SPARK_MEM. 
 
 Mesos executor will try to find spark binaries by $SPARK_HOME or user could define spark.mesos.executor.home as "/usr/local/spark" in /usr/local/spark/conf/spark-defaults.conf. Please refer to https://spark.apache.org/docs/latest/running-on-mesos.html for more configuration parameters. 
 
@@ -199,17 +199,50 @@ https://docs.docker.com/compose/
 
 # Start etcd
 
-setsid /usr/local/etcd/etcd --listen-peer-urls 'http://10.211.62.101:2380,http://10.211.62.101:7001' --listen-client-urls 'http://10.211.62.101:2379,http://10.211.62.101:4001' --advertise-client-urls 'http://10.211.62.101:2379,http://10.211.62.101:4001' >"/tmp/etcd.log" 2>&1 &
+setsid /usr/local/etcd/etcd --listen-client-urls http://0.0.0.0:4001 --advertise-client-urls http://10.211.56.101:4001 >"/tmp/etcd.log" 2>&1 &
 
 # Test etcd
 
 Run the following command to make sure etcd works
 
 ```
-etcdctl --peers 10.211.62.101:4001 set key1 value1
+etcdctl --peers 10.211.56.101:4001 set key1 value1
+curl -L http://`hostname -i`:4001/v2/keys/
 ```
 
 Refer to https://github.com/coreos/etcd/blob/master/Documentation/admin_guide.md for more info of etcd
+
+# Start Kubernetes
+Now start the kubernetes-mesos API server, controller manager, and scheduler on the master node:
+
+```
+setsid km apiserver \
+  --address=10.211.56.101 \
+  --etcd-servers=http://10.211.56.101:4001 \
+  --service-cluster-ip-range=10.10.10.0/24 \
+  --port=8888 \
+  --cloud-provider=mesos \
+  --cloud-config=mesos-cloud.conf \
+  --secure-port=0 \
+  --v=1 >apiserver.log 2>&1 
+
+setsid km controller-manager \
+  --master=10.211.56.101:8888 \
+  --cloud-provider=mesos \
+  --cloud-config=./mesos-cloud.conf  \
+  --v=1 >controller.log 2>&1
+
+setsid km scheduler \
+  --address=10.211.56.101 \
+  --mesos-master=10.211.56.101:5050 \
+  --etcd-servers=http://10.211.56.101:4001 \
+  --mesos-user=root \
+  --api-servers=10.211.56.101:8888 \
+  --cluster-dns=10.10.10.10 \
+  --cluster-domain=cluster.local \
+  --v=2 >scheduler.log 2>&1 
+```
+
 
 # Go programming
 

@@ -47,20 +47,16 @@ function installMesos {
 	#service docker start
 	#chkconfig docker on
 	
-	# install development environment for kubernetes-mesos
-	# https://github.com/mesosphere/kubernetes-mesos/blob/master/DEVELOP.md
-	# https://github.com/mesosphere/kubernetes-mesos
-	#yum install -y golang
-	#curl -L https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz | \
-	#tar xz && (cd protobuf-2.5.0/ && ./configure --prefix=/usr && make && make install)
-	#mkdir -pv /usr/local/gocode && \
-	#(export GOPATH=/usr/local/gocode; cd $GOPATH && go get github.com/tools/godep && \
-	#ln -sv $GOPATH/bin/godep /usr/local/bin/godep)
-	#cd $GOPATH
-	#mkdir -p src/github.com/mesosphere/kubernetes-mesos
-	#git clone https://github.com/mesosphere/kubernetes-mesos.git src/github.com/mesosphere/kubernetes-mesos
-	#cd src/github.com/mesosphere/kubernetes-mesos
-	#make bootstrap
+	# install k8s on top of mesos 
+	# https://github.com/kubernetes/kubernetes/blob/release-1.1/docs/getting-started-guides/mesos.md
+	cd /usr/local/src
+	git clone https://github.com/kubernetes/kubernetes
+    cd kubernetes
+	git checkout -b release-1.1 -t remotes/origin/release-1.1
+	export KUBERNETES_CONTRIB=mesos
+	make
+	cp -f /vagrant/resources/k8smesos/k8smesos.sh /etc/profile.d/k8smesos.sh
+	chmod +x /etc/profile.d/k8smesos.sh
 }
 
 echo "setup mesos"
