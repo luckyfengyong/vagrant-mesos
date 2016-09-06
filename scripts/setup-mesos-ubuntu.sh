@@ -1,7 +1,7 @@
 #!/bin/bash
 source "/vagrant/scripts/common.sh"
 
-#http://mesosphere.com/docs/getting-started/datacenter/install/
+#https://open.mesosphere.com/getting-started/install/
 #/usr/bin/mesos-init-wrapper
 
 function setupMesos {

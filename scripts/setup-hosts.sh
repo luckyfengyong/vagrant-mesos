@@ -45,5 +45,5 @@ function setupHosts {
 }
 
 
-echo "setup ubuntu hosts file"
+echo "setup hosts file"
 setupHosts
